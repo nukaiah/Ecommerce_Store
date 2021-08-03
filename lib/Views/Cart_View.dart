@@ -153,7 +153,7 @@ class _CartScreenState extends State<CartScreen> {
                       Fluttertoast.showToast(msg: "Add Item to Proceed");
                     } else {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => CheckOutScreen()));
+                          MaterialPageRoute(builder: (_) => PaymentScreen()));
                     }
                   },
                   child: Text(
