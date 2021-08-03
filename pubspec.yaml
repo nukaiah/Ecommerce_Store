@@ -66,8 +66,7 @@ flutter:
      - assets/images/bottom2.png
      - assets/images/good mornng.jpg
      - assets/images/goodnight1.jpg
-     - assets/images/Store.webp
-  #   - images/a_dot_ham.jpeg
+     - assets/images/stores.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

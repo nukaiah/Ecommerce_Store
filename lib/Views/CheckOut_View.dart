@@ -66,7 +66,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Confirm Ordere"),
+        toolbarHeight: 80,
+        backgroundColor: Colors.green,
+        title: Text("Confirm Order"),
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))),
       ),
       body: Column(
         children: [
@@ -93,21 +98,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 : null,
           ),
           Visibility(visible: !codenable, child: Text("COD Unavailable")),
-          RadioListTile(
-            groupValue: radioItem,
-            title: Text('UPI'),
-            value: 'UPI',
-            onChanged: podenable
-                ? (val) {
+          podenable
+              ? RadioListTile(
+                  groupValue: radioItem,
+                  title: Text('UPI'),
+                  value: 'UPI',
+                  onChanged: (val) {
                     setState(() {
                       _razorpay.open(options);
                       radioItem = val.toString();
                       print(radioItem);
                     });
-                  }
-                : null,
-          ),
-          Visibility(visible: !podenable, child: Text("Payment Unavailable")),
+                  })
+              : Visibility(
+                  visible: !podenable,
+                  child: Row(
+                    children: [
+                      Icon(Icons.disabled_by_default),
+                      Text("Payment Unavailable")
+                    ],
+                  )),
         ],
       ),
       bottomNavigationBar: Container(
