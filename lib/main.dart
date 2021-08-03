@@ -30,7 +30,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () async {
+    Timer(Duration(seconds: 3), () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       if (prefs.getString("email") == null) {
@@ -45,6 +45,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+        body: Center(child: Image.asset("assets/images/Store.webp")));
   }
 }

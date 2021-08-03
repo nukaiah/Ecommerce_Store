@@ -14,6 +14,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   var _razorpay = Razorpay();
   var options;
   bool codenable = true;
+  bool podenable = true;
 
   @override
   void initState() {
@@ -31,11 +32,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     super.initState();
     testRConfig();
+    testRConfig1();
   }
 
   testRConfig() async {
     RemoteConfig config = await MyConfigures.contro();
     setState(() => codenable = config.getString("COD") == "true");
+  }
+
+  testRConfig1() async {
+    RemoteConfig config = await MyConfigures.contro();
+    setState(() => podenable = config.getString("POD") == "true");
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -90,14 +97,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
             groupValue: radioItem,
             title: Text('UPI'),
             value: 'UPI',
-            onChanged: (val) {
-              setState(() {
-                _razorpay.open(options);
-                radioItem = val.toString();
-                print(radioItem);
-              });
-            },
+            onChanged: podenable
+                ? (val) {
+                    setState(() {
+                      _razorpay.open(options);
+                      radioItem = val.toString();
+                      print(radioItem);
+                    });
+                  }
+                : null,
           ),
+          Visibility(visible: !podenable, child: Text("Payment Unavailable")),
         ],
       ),
       bottomNavigationBar: Container(
