@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "136197010231",
+    "project_id": "jrstores-125bd",
+    "storage_bucket": "jrstores-125bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136197010231:android:3fa06a14fc58c5d55f60b2",
+        "android_client_info": {
+          "package_name": "com.example.jr_stores_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136197010231-3pfvmggp0peb0r8dicqlrmasbr4qbb2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jr_stores_app",
+            "certificate_hash": "98560824575933f6f28740a3f2d692283a804778"
+          }
+        },
+        {
+          "client_id": "136197010231-4g0c5nse90hmlfe39159b94rjm0gmn6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqeODSjnkaUeWl_OtZX8pIgxbwmGGyD3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136197010231-4g0c5nse90hmlfe39159b94rjm0gmn6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
