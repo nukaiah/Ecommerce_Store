@@ -32,47 +32,50 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           toolbarHeight: 80,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.indigo[400],
           title: Text("Exclusive Offers"),
           elevation: 0.0,
           shape: RoundedRectangleBorder(
               borderRadius:
-                  BorderRadius.only(bottomRight: Radius.circular(50))),
+                  BorderRadius.only(bottomRight: Radius.circular(25))),
           actions: [
-            Stack(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.shopping_cart),
-                  onPressed: () async {
-                    await Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => CartScreen()));
-                    if (mounted) {
-                      setState(() {});
-                    }
-                  },
-                  iconSize: 30,
-                ),
-                Positioned(
-                  right: -15,
-                  left: 0,
-                  top: 1,
-                  child: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      child: Text(
-                        "${FlutterCart().cartItem.length}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.5),
+            Center(
+              child: Stack(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () async {
+                      await Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => CartScreen()));
+                      if (mounted) {
+                        setState(() {});
+                      }
+                    },
+                    iconSize: 30,
+                  ),
+                  Positioned(
+                    right: -15,
+                    left: 0,
+                    top: 1,
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.green,
+                        child: Text(
+                          "${FlutterCart().cartItem.length}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.5),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ],
         ),

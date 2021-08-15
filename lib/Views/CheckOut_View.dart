@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:jr_stores_app/Providers/Cart_Provider.dart';
 import 'package:jr_stores_app/Providers/Remote_Config.dart';
 import 'package:jr_stores_app/Views/AddressScreen.dart';
+import 'package:jr_stores_app/Views/Cart_View.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -67,15 +71,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.indigo[400],
+        brightness: Brightness.dark,
         title: Text("Confirm Order"),
         elevation: 0.0,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))),
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(25))),
       ),
       body: Column(
         children: [
-          Text("Delivery Address"),
+          Container(
+            alignment: Alignment.center,
+            width: width * 0.95,
+            height: height * 0.05,
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.indigo[400])),
+            child: Text("Delivery Address :"),
+          ),
           MaterialButton(
             onPressed: () {
               Navigator.push(
@@ -83,7 +95,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
             },
             child: Text("ADD ADDRESS+"),
           ),
-          Text("Payment Method"),
+          Container(
+            alignment: Alignment.center,
+            width: width * 0.95,
+            height: height * 0.05,
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.indigo[400])),
+            child: Text("Payment Method :"),
+          ),
           RadioListTile(
             groupValue: radioItem,
             title: Text('COD'),
@@ -137,7 +156,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: TextButton(
                   onPressed: () {
                     print("order Placed");
-                    // confirmOrder();
+                    confirmOrder();
                   },
                   child: Text(
                     "Confirm Order",
@@ -150,20 +169,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  // confirmOrder() {
-  //   FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  //   _fireStore.collection("Orders").doc().set({
-  //     "Date": DateTime.now(),
-  //     "Products": Mycartservices.cart.cartItem.map((e) {
-  //       return {
-  //         "proname": e.productName,
-  //         "proimage": e.uniqueCheck,
-  //       };
-  //     })
-  //   }).then((value) {
-  //     Mycartservices.clearCart();
-  //     Navigator.pushAndRemoveUntil(context,
-  //         MaterialPageRoute(builder: (_) => CartScreen()), (route) => false);
-  //   });
-  // }
+  void confirmOrder() {
+    FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+    String uid = FirebaseAuth.instance.currentUser.uid.toString();
+    _fireStore.collection("Orders").doc().set({
+      "OrderTime": DateTime.now().toString(),
+      "payment": radioItem.toString(),
+      "uid": uid.toString(),
+      "Products": Mycartservices.cart.cartItem.map((val) {
+        return {
+          "proimage": val.uniqueCheck,
+          "proname": val.productName,
+          "proid": val.productId,
+          "proprice": val.unitPrice,
+          "proqty": val.quantity,
+        };
+      }).toList()
+    }).then((value) {
+      print("Success");
+      Mycartservices.clearCart();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => CartScreen()),
+      );
+    });
+  }
 }

@@ -14,7 +14,12 @@ class _PlaceOtrderState extends State<PlaceOtrder> {
       ),
       body: ListView(
         children: [
-          Text("Select Delivery Type"),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text("Select Delivery Type"),
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.indigo[400])),
+          ),
           Container(
             child: Column(
               children: [],

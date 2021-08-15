@@ -9,7 +9,10 @@ class _CarouselDetailsScreenState extends State<CarouselDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.indigo[400],
+      ),
       body: SafeArea(
         child: Center(child: Text("Will be Updated in very soon")),
       ),

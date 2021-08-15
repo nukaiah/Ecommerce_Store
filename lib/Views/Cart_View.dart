@@ -17,13 +17,14 @@ class _CartScreenState extends State<CartScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           toolbarHeight: 80,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.indigo[400],
           title: Text("MyCart (${FlutterCart().cartItem.length} Items)"),
           elevation: 0.0,
           shape: RoundedRectangleBorder(
               borderRadius:
-                  BorderRadius.only(bottomRight: Radius.circular(50))),
+                  BorderRadius.only(bottomRight: Radius.circular(25))),
           actions: [
             IconButton(
                 tooltip: "",
