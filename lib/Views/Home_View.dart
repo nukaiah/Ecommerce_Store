@@ -14,6 +14,7 @@ import 'package:jr_stores_app/Providers/Product_Provider.dart';
 import 'package:jr_stores_app/Views/CarouselDetails_View.dart';
 import 'package:jr_stores_app/Views/Cart_View.dart';
 import 'package:jr_stores_app/Views/CatgoryProducts_View.dart';
+import 'package:jr_stores_app/Views/MyOrders.dart';
 import 'package:jr_stores_app/Views/Search_View.dart';
 import 'package:jr_stores_app/Views/ViewAll_View.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,10 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
             Card(
               child: ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Home"),
+                leading: Icon(Icons.local_activity),
+                title: Text("MyOrders"),
                 trailing: Icon(Icons.arrow_forward_ios_rounded),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => MyOrders()));
+                },
               ),
             ),
             Card(
