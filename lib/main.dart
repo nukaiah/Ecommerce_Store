@@ -46,6 +46,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: Image.asset("assets/images/stores.webp")));
+        body: Center(child: Image.asset("assets/images/stores.png")));
   }
 }

@@ -8,7 +8,7 @@ import 'package:flutter_cart/flutter_cart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jr_stores_app/Authentication_Views/Login_View.dart';
+import 'package:jr_stores_app/Authentication_Views/SigUpView.dart';
 import 'package:jr_stores_app/Providers/Cart_Provider.dart';
 import 'package:jr_stores_app/Providers/Product_Provider.dart';
 import 'package:jr_stores_app/Views/CarouselDetails_View.dart';
@@ -68,9 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: snapshot.data.docs.length,
                     itemBuilder: (_, i) {
                       return UserAccountsDrawerHeader(
-                          currentAccountPicture: CircleAvatar(),
+                          currentAccountPicture: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(snapshot.data.docs[i]["profile"]),
+                          ),
                           accountName: Text(snapshot.data.docs[i]["username"]),
-                          accountEmail: Text(snapshot.data.docs[i]["email"]));
+                          accountEmail: Text(
+                              "+91 " + snapshot.data.docs[i]["phoneNumber"]));
                     },
                   );
                 }),
@@ -461,7 +465,7 @@ class _HomeScreenState extends State<HomeScreen> {
       auth.signOut();
       FlutterCart().deleteAllCart();
       Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (_) => LoginScreen()), (route) => false);
+          MaterialPageRoute(builder: (_) => RegisterPage()), (route) => false);
       Fluttertoast.showToast(msg: "LogOut Successfully");
     } on Exception catch (e) {
       Fluttertoast.showToast(msg: e.toString());

@@ -19,77 +19,80 @@ class _ForgotpasswordScreenState extends State<ForgotpasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BackGround(
-        title: "Forgot password?",
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Material(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Colors.black54,
-                  child: TextFormField(
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    controller: _emailcontroller,
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return "Email Can not be empty";
-                      }
-                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9,-]+.[a-z]")
-                          .hasMatch(value)) {
-                        return "please enter a valid email";
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      hintStyle: TextStyle(color: Colors.white),
-                      suffixIcon: Icon(
-                        Icons.email_outlined,
+      body: SingleChildScrollView(
+        child: BackGround(
+          title: "Forgot password?",
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Material(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    color: Colors.black54,
+                    child: TextFormField(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      controller: _emailcontroller,
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return "Email Can not be empty";
+                        }
+                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9,-]+.[a-z]")
+                            .hasMatch(value)) {
+                          return "please enter a valid email";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Email",
+                        hintStyle: TextStyle(color: Colors.white),
+                        suffixIcon: Icon(
+                          Icons.email_outlined,
+                          color: Colors.white,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                _isLoading
-                    ? Center(
-                        child: SpinKitCircle(
-                          color: Colors.green,
-                        ),
-                      )
-                    : Align(
-                        alignment: Alignment.centerRight,
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          elevation: 0,
-                          onPressed: () {
-                            forgotPassword();
-                          },
-                          child: Text(
-                            "Reset Password",
-                            style: GoogleFonts.dancingScript(
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 1,
-                                fontSize: 20,
-                                color: Colors.white),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _isLoading
+                      ? Center(
+                          child: SpinKitCircle(
+                            color: Colors.green,
                           ),
-                          color: Colors.orange,
+                        )
+                      : Align(
+                          alignment: Alignment.centerRight,
+                          child: MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            elevation: 0,
+                            onPressed: () {
+                              forgotPassword();
+                            },
+                            child: Text(
+                              "Reset Password",
+                              style: GoogleFonts.dancingScript(
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 1,
+                                  fontSize: 20,
+                                  color: Colors.white),
+                            ),
+                            color: Colors.orange,
+                          ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
