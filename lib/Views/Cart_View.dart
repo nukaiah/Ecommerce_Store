@@ -4,6 +4,7 @@ import 'package:flutter_cart/flutter_cart.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jr_stores_app/Providers/Cart_Provider.dart';
 import 'package:jr_stores_app/Views/CheckOut_View.dart';
+import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -35,94 +36,97 @@ class _CartScreenState extends State<CartScreen> {
                 })
           ],
         ),
-        body: ListView.separated(
-          separatorBuilder: (_, i) {
-            return Divider(
-              height: 4,
-            );
-          },
-          itemCount: FlutterCart().cartItem.length,
-          itemBuilder: (_, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: EdgeInsets.all(8),
-                height: height * 0.15,
-                width: width * 1,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Row(
-                  children: [
-                    Container(
-                      width: width * 0.270,
+        body: FlutterCart().cartItem.length <= 0
+            ? Center(child: Lottie.asset("assets/lottie/emptycart.json"))
+            : ListView.separated(
+                separatorBuilder: (_, i) {
+                  return Divider(
+                    height: 4,
+                  );
+                },
+                itemCount: FlutterCart().cartItem.length,
+                itemBuilder: (_, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.all(8),
                       height: height * 0.15,
-                      child: CachedNetworkImage(
-                          imageUrl: FlutterCart().cartItem[index].uniqueCheck),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: width * 0.5,
-                          child: Text(
-                            FlutterCart().cartItem[index].productName,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                      width: width * 1,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: width * 0.270,
+                            height: height * 0.15,
+                            child: CachedNetworkImage(
+                                imageUrl:
+                                    FlutterCart().cartItem[index].uniqueCheck),
                           ),
-                        ),
-                        Container(
-                          width: width * 0.4,
-                          child: Text(
-                            "Price: ₹ " +
-                                FlutterCart()
-                                    .cartItem[index]
-                                    .unitPrice
-                                    .toString(),
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              border: Border.all(color: Colors.black)),
-                          child: Row(
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(
-                                  icon: Icon(Icons.remove_circle),
-                                  onPressed: () {
-                                    Mycartservices.decrease(index);
-                                    setState(() {});
-                                  }),
-                              Text(FlutterCart()
-                                  .cartItem[index]
-                                  .quantity
-                                  .toString()),
-                              IconButton(
-                                  icon: Icon(Icons.add_circle),
-                                  onPressed: () {
-                                    Mycartservices.icrease(index);
-                                    setState(() {});
-                                  }),
+                              Container(
+                                width: width * 0.5,
+                                child: Text(
+                                  FlutterCart().cartItem[index].productName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                width: width * 0.4,
+                                child: Text(
+                                  "Price: ₹ " +
+                                      FlutterCart()
+                                          .cartItem[index]
+                                          .unitPrice
+                                          .toString(),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                    border: Border.all(color: Colors.black)),
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(Icons.remove_circle),
+                                        onPressed: () {
+                                          Mycartservices.decrease(index);
+                                          setState(() {});
+                                        }),
+                                    Text(FlutterCart()
+                                        .cartItem[index]
+                                        .quantity
+                                        .toString()),
+                                    IconButton(
+                                        icon: Icon(Icons.add_circle),
+                                        onPressed: () {
+                                          Mycartservices.icrease(index);
+                                          setState(() {});
+                                        }),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
+                          IconButton(
+                              onPressed: () {
+                                Mycartservices.removeCart(index);
+                                setState(() {});
+                              },
+                              icon: Icon(Icons.delete))
+                        ],
+                      ),
                     ),
-                    IconButton(
-                        onPressed: () {
-                          Mycartservices.removeCart(index);
-                          setState(() {});
-                        },
-                        icon: Icon(Icons.delete))
-                  ],
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(

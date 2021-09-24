@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jr_stores_app/Authentication_Views/SigUpView.dart';
 import 'package:jr_stores_app/Views/Home_View.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:lottie/lottie.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: Image.asset("assets/images/stores.png")));
+        body: Center(child: Lottie.asset("assets/lottie/splashlogo.json")));
   }
 }

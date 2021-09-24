@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jr_stores_app/Views/OrderPros.dart';
 
 class MyOrders extends StatefulWidget {
   @override
@@ -35,11 +36,23 @@ class _MyOrdersState extends State<MyOrders> {
           return ListView.builder(
               itemCount: snapshot.data.docs.length,
               itemBuilder: (BuildContext context, index) {
-                return ListTile(
-                  title: Text(
-                    snapshot.data.docs[index]["OrderTime"],
+                return Card(
+                  child: ListTile(
+                    title: Text(
+                      snapshot.data.docs[index]["OrderTime"],
+                    ),
+                    subtitle: Text(snapshot.data.docs[index]["payment"]),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => OrderPros(
+                                    oplist: snapshot.data.docs[index]
+                                        ["Products"],
+                                  )));
+                    },
                   ),
-                  subtitle: Text(snapshot.data.docs[index]["payment"]),
                 );
               });
         },
